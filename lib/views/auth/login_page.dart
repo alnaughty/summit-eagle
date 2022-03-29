@@ -111,9 +111,10 @@ class _LoginPageState extends State<LoginPage> {
                         cacheKey: "bg-image",
                         colorBlendMode: BlendMode.dstATop,
                         color: Colors.grey.shade900
-                            .withOpacity(constraint.maxWidth <= 800 ? .5 : 1),
+                            .withOpacity(constraint.maxWidth <= 800 ? .3 : 1),
                         imageUrl:
-                            "https://static.vecteezy.com/system/resources/previews/005/299/230/non_2x/financial-stock-market-graph-on-stock-market-investment-trading-bullish-point-bearish-point-trend-of-graph-for-business-idea-and-all-art-work-design-illustration-vector.jpg",
+                            "https://drive.google.com/uc?export=view&id=1jVGM1tC5D7Q859WkJ8xJyLfbY_lxC9I5",
+                        // "https://static.vecteezy.com/system/resources/previews/005/299/230/non_2x/financial-stock-market-graph-on-stock-market-investment-trading-bullish-point-bearish-point-trend-of-graph-for-business-idea-and-all-art-work-design-illustration-vector.jpg",
                       ),
                       // Text(constraint.maxWidth.toString()),
                       Padding(

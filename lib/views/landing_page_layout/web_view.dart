@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:summiteagle/globals/access.dart';
 import 'package:summiteagle/models/drawer_items.dart';
+import 'package:summiteagle/services/data_cacher.dart';
 
 class WebView extends StatefulWidget {
   const WebView(
@@ -13,6 +14,7 @@ class WebView extends StatefulWidget {
 }
 
 class _WebViewState extends State<WebView> with SingleTickerProviderStateMixin {
+  final DataCacher _dataCacher = DataCacher.instance;
   final Widget title = Row(
     children: [
       Hero(
@@ -74,9 +76,9 @@ class _WebViewState extends State<WebView> with SingleTickerProviderStateMixin {
                 //   tooltip: "Afficher les options de paramètres",
                 //   padding: const EdgeInsets.all(0),
                 //   offset: const Offset(0, 45),
-                //   onSelected: (int value) async {
-                //     // callback(value);
-                //   },
+                // onSelected: (int value) async {
+                //   // callback(value);
+                // },
                 //   icon: SizedBox(
                 //     width: 40,
                 //     height: 40,
@@ -124,6 +126,22 @@ class _WebViewState extends State<WebView> with SingleTickerProviderStateMixin {
                 //   ],
                 // ),
                 PopupMenuButton(
+                  onSelected: (v) async {
+                    if (v == "/logout") {
+                      setState(() {
+                        loggedUser = null;
+                      });
+                      await _dataCacher.clearCredentials().whenComplete(
+                            () => Navigator.pushReplacementNamed(
+                              context,
+                              '/login_page',
+                              result: {},
+                            ),
+                          );
+                    } else {
+                      /// show account details
+                    }
+                  },
                   tooltip: "Account",
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
@@ -150,6 +168,7 @@ class _WebViewState extends State<WebView> with SingleTickerProviderStateMixin {
                   ),
                   itemBuilder: (_) => [
                     PopupMenuItem(
+                      value: "/show_details",
                       child: Row(
                         children: [
                           Icon(
@@ -173,6 +192,7 @@ class _WebViewState extends State<WebView> with SingleTickerProviderStateMixin {
                       ),
                     ),
                     PopupMenuItem(
+                      value: "/logout",
                       child: Row(
                         children: [
                           Icon(
