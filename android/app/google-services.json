@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "437117244657",
+    "project_id": "summiteagle-140af",
+    "storage_bucket": "summiteagle-140af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437117244657:android:be45516160c774940c0550",
+        "android_client_info": {
+          "package_name": "com.olyumpustech.summiteagle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437117244657-d1tjn8e6qm2qa39n94i8k9ogd0f9n61f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPCFzgFk8_R4wk7F0yzI_Obo0Ny6JfiXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437117244657-d1tjn8e6qm2qa39n94i8k9ogd0f9n61f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "437117244657-iee047uga580k7pjcsg047ab50vee6jg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.olyumpustech.summiteagle"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
