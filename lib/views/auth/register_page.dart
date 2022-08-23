@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:summiteagle/globals/app.dart';
 import 'package:summiteagle/globals/my_regexp.dart';
 import 'package:summiteagle/globals/textfield_design.dart';
 import 'package:summiteagle/globals/widget.dart';
@@ -16,7 +17,7 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> with AppConfig {
   bool _isLoading = false;
   final BehaviorSubject<String> _emailSubject = BehaviorSubject<String>();
   final BehaviorSubject<String> _passwordSubject = BehaviorSubject<String>();
@@ -102,7 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
         GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
-            backgroundColor: Colors.grey.shade900,
+            // backgroundColor: Colors.grey.shade900,
             body: LayoutBuilder(
               builder: (_, constraint) {
                 double cardVertPadd = constraint.maxWidth > 800
@@ -127,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             : BoxFit.fitHeight,
                         colorBlendMode: BlendMode.dstATop,
                         color: Colors.grey.shade900
-                            .withOpacity(constraint.maxWidth <= 800 ? .5 : 1),
+                            .withOpacity(constraint.maxWidth <= 800 ? 0 : 1),
                         cacheKey: "bg-image",
                         imageUrl:
                             "https://static.vecteezy.com/system/resources/previews/005/299/230/non_2x/financial-stock-market-graph-on-stock-market-investment-trading-bullish-point-bearish-point-trend-of-graph-for-business-idea-and-all-art-work-design-illustration-vector.jpg",
@@ -168,80 +169,40 @@ class _RegisterPageState extends State<RegisterPage> {
                                     ),
                                     SizedBox(
                                       width: double.maxFinite,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                      child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Hero(
-                                            tag: "logo",
-                                            child: Container(
-                                              width: 90,
-                                              height: 90,
-                                              color: Colors.blue,
+                                          // SizedBox(
+                                          //   width: double.maxFinite,
+                                          //   child: Container(
+                                          //     padding: const EdgeInsets.all(0),
+                                          //     alignment: Alignment.center,
+                                          //     child: logo,
+                                          //   ),
+                                          // ),
+                                          Container(
+                                            constraints: const BoxConstraints(
+                                              minWidth: 180,
+                                              maxWidth: 350,
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: constraint.maxWidth * .01,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  minWidth: 180,
-                                                  maxWidth: 350,
-                                                ),
-                                                width: constraint.maxWidth -
-                                                    (((constraint.maxWidth <=
-                                                                    800
-                                                                ? 0
-                                                                : constraint
-                                                                        .maxWidth *
-                                                                    .3) *
-                                                            2) +
-                                                        350),
-                                                child: const Text(
-                                                  "LETS GET STARTED",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w800,
-                                                    fontSize: 32,
-                                                    height: 1,
-                                                  ),
-                                                ),
+                                            width: constraint.maxWidth -
+                                                (((constraint.maxWidth <= 800
+                                                            ? -300
+                                                            : constraint
+                                                                    .maxWidth *
+                                                                .3) *
+                                                        2) +
+                                                    350),
+                                            child: Text(
+                                              "LETS GET STARTED!",
+                                              style: TextStyle(
+                                                color: black,
+                                                fontWeight: FontWeight.w800,
+                                                fontSize: 42,
+                                                height: .8,
                                               ),
-                                              Container(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  minWidth: 200,
-                                                  maxWidth: 300,
-                                                ),
-                                                width: constraint.maxWidth -
-                                                    (((constraint.maxWidth <=
-                                                                    800
-                                                                ? 0
-                                                                : constraint
-                                                                        .maxWidth *
-                                                                    .3) *
-                                                            2) +
-                                                        350),
-                                                child: Text(
-                                                  "Summit Eagle Accounting and Finance",
-                                                  maxLines: 2,
-                                                  style: TextStyle(
-                                                    color: Colors.white
-                                                        .withOpacity(.5),
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 14,
-                                                    height: 1,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -250,7 +211,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       key: _formKey,
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                          horizontal: 20,
+                                          horizontal: 0,
                                         ),
                                         child: Column(
                                           children: [
@@ -276,9 +237,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 _emailSubject.add(text);
                                               },
                                               controller: _emailController,
-                                              cursorColor: Colors.white,
-                                              style: const TextStyle(
-                                                color: Colors.white,
+                                              cursorColor: black,
+                                              style: TextStyle(
+                                                color: black,
                                               ),
                                               decoration:
                                                   _tDes.defaultDecoration(
@@ -307,9 +268,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                               onFieldSubmitted: (text) async {
                                                 await register();
                                               },
-                                              cursorColor: Colors.white,
-                                              style: const TextStyle(
-                                                color: Colors.white,
+                                              cursorColor: black,
+                                              style: TextStyle(
+                                                color: black,
                                               ),
                                               obscureText: obscureText,
                                               controller: _passwordController,
@@ -353,9 +314,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                               onFieldSubmitted: (text) async {
                                                 await register();
                                               },
-                                              cursorColor: Colors.white,
-                                              style: const TextStyle(
-                                                color: Colors.white,
+                                              cursorColor: black,
+                                              style: TextStyle(
+                                                color: black,
                                               ),
                                               obscureText: obscureConfText,
                                               controller:
@@ -396,9 +357,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 return null;
                                               },
                                               controller: _firstName,
-                                              cursorColor: Colors.white,
-                                              style: const TextStyle(
-                                                color: Colors.white,
+                                              cursorColor: black,
+                                              style: TextStyle(
+                                                color: black,
                                               ),
                                               decoration:
                                                   _tDes.defaultDecoration(
@@ -421,9 +382,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 return null;
                                               },
                                               controller: _lastName,
-                                              cursorColor: Colors.white,
-                                              style: const TextStyle(
-                                                color: Colors.white,
+                                              cursorColor: black,
+                                              style: TextStyle(
+                                                color: black,
                                               ),
                                               decoration:
                                                   _tDes.defaultDecoration(
@@ -446,24 +407,22 @@ class _RegisterPageState extends State<RegisterPage> {
                                                     child: Row(
                                                       children: [
                                                         Checkbox(
-                                                          activeColor:
-                                                              Colors.white,
+                                                          activeColor: black,
                                                           value: isRemember,
-                                                          checkColor: Colors
-                                                              .grey.shade900,
-                                                          side:
-                                                              const BorderSide(
-                                                            color: Colors.white,
+                                                          checkColor:
+                                                              Colors.white,
+                                                          side: BorderSide(
+                                                            color: black,
                                                           ),
                                                           onChanged: (bo) =>
                                                               setState(() =>
                                                                   isRemember =
                                                                       !isRemember),
                                                         ),
-                                                        const Text(
+                                                        Text(
                                                           "Remember me",
                                                           style: TextStyle(
-                                                            color: Colors.white,
+                                                            color: black,
                                                           ),
                                                         )
                                                       ],
@@ -491,7 +450,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 onPressed: () async {
                                                   await register();
                                                 },
-                                                color: Colors.blue.shade800,
+                                                color: orange,
                                                 child: const Center(
                                                   child: Text(
                                                     "REGISTER",
@@ -514,8 +473,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 text: TextSpan(
                                                   text:
                                                       "Already have an account ? ",
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
+                                                  style: TextStyle(
+                                                    color: black,
                                                     fontSize: 17,
                                                   ),
                                                   children: [
@@ -529,8 +488,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                             },
                                                       text: "Login",
                                                       style: TextStyle(
-                                                        color: Colors
-                                                            .blue.shade400,
+                                                        color: orange,
                                                         fontWeight:
                                                             FontWeight.w600,
                                                         fontSize: 17,

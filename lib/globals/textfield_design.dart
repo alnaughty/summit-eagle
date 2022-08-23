@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:summiteagle/globals/app.dart';
 
-class TextFieldDesign {
+class TextFieldDesign extends AppConfig {
   InputDecoration defaultDecoration(
       {required String hintText,
       required String labelText,
@@ -10,22 +11,22 @@ class TextFieldDesign {
       labelText: labelText,
       hintText: hintText,
       hintStyle: TextStyle(
-        color: Colors.white.withOpacity(.5),
+        color: black.withOpacity(.5),
       ),
-      labelStyle: const TextStyle(
-        color: Colors.white,
+      labelStyle: TextStyle(
+        color: black,
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
-        borderSide: const BorderSide(
-          color: Colors.grey,
+        borderSide: BorderSide(
+          color: Colors.grey.shade800,
         ),
       ),
-      focusColor: Colors.white,
+      focusColor: black,
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
-        borderSide: const BorderSide(
-          color: Colors.white,
+        borderSide: BorderSide(
+          color: black,
           width: 2,
         ),
       ),
@@ -38,3 +39,5 @@ class TextFieldDesign {
     );
   }
 }
+
+

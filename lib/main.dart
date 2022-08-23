@@ -7,6 +7,7 @@ import 'package:summiteagle/summit_eagle.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DataCacher _cacher = DataCacher.instance;
+  await _cacher.init();
   await Firebase.initializeApp(
     options: kIsWeb
         ? const FirebaseOptions(
@@ -17,6 +18,5 @@ void main() async {
           )
         : null,
   );
-  _cacher.init();
   runApp(const SummitEagle());
 }

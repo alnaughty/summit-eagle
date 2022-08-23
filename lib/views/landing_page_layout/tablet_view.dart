@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:summiteagle/globals/access.dart';
+import 'package:summiteagle/globals/app.dart';
+import 'package:summiteagle/globals/widget.dart';
 import 'package:summiteagle/models/drawer_items.dart';
 import 'package:summiteagle/services/data_cacher.dart';
 
@@ -15,35 +17,9 @@ class TabletView extends StatefulWidget {
 }
 
 class _TabletViewState extends State<TabletView>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AppConfig {
   final DataCacher _dataCacher = DataCacher.instance;
   late final TabController _tabController;
-  late Widget title = Row(
-    children: [
-      Hero(
-        tag: "logo",
-        child: Container(
-          height: 50,
-          width: 50,
-          color: Colors.red,
-        ),
-      ),
-      const SizedBox(
-        width: 10,
-      ),
-      Expanded(
-        child: Text(
-          "Summit Eagle \nAccounting and Finance",
-          maxLines: 2,
-          style: TextStyle(
-            fontSize: 13,
-            color: Colors.white.withOpacity(.8),
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      )
-    ],
-  );
   @override
   void initState() {
     _tabController = TabController(
@@ -65,16 +41,20 @@ class _TabletViewState extends State<TabletView>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: title,
-        backgroundColor: Colors.grey.shade900,
+        centerTitle: false,
+        title: SizedBox(
+          height: 50,
+          child: logo,
+        ),
+        // backgroundColor: Colors.grey.shade900,
       ),
-      backgroundColor: Colors.grey.shade800,
+      // backgroundColor: Colors.grey.shade800,
       body: Row(
         children: [
           Container(
               height: double.maxFinite,
               width: 70,
-              color: Colors.grey.shade900,
+              // color: Colors.grey.shade100,
               child: Column(
                 children: [
                   Expanded(
@@ -91,16 +71,16 @@ class _TabletViewState extends State<TabletView>
                           child: MaterialButton(
                             elevation: 0,
                             color: widget.currentIndex == index
-                                ? Colors.blue.shade800
+                                ? orange
                                 : Colors.transparent,
                             onPressed: () {
                               widget.drawerItems[index].onTap(index);
                               _tabController.animateTo(index);
                             },
-                            child: Icon(
-                              widget.drawerItems[index].icon,
-                              color: Colors.white,
-                            ),
+                            child: Icon(widget.drawerItems[index].icon,
+                                color: widget.currentIndex == index
+                                    ? Colors.white
+                                    : black.withOpacity(.7)),
                           ),
                         ),
                       ),
@@ -140,6 +120,7 @@ class _TabletViewState extends State<TabletView>
               )),
           Expanded(
             child: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
               children: [
                 ...widget.drawerItems.map(
                   (e) => e.child,

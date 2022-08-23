@@ -5,10 +5,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:summiteagle/globals/access.dart';
+import 'package:summiteagle/globals/app.dart';
 import 'package:summiteagle/globals/my_regexp.dart';
 import 'package:summiteagle/globals/textfield_design.dart';
 import 'package:summiteagle/globals/widget.dart';
 import 'package:summiteagle/services/auth.dart';
+import 'package:summiteagle/services/firestore/admin.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with AppConfig {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -53,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  final Admin admin = Admin();
   bool _isLoading = false;
   Future<void> login() async {
     setState(() {
@@ -66,11 +69,12 @@ class _LoginPageState extends State<LoginPage> {
       password: _passwordController.text,
       isRememberd: isRemember,
     )
-        .then((value) {
+        .then((value) async {
       if (value != null) {
         setState(() {
           loggedUser = value;
         });
+        await admin.isAdmin();
         Navigator.pushReplacementNamed(context, '/landing_page');
       }
     }).whenComplete(() => setState(
@@ -99,23 +103,34 @@ class _LoginPageState extends State<LoginPage> {
                 return Container(
                   width: constraint.maxWidth,
                   height: constraint.maxHeight,
-                  color: Colors.grey.shade900,
+                  // color: Colors.grey.shade900,
                   child: Stack(
                     children: [
-                      CachedNetworkImage(
+                      Image.network(
+                        "https://drive.google.com/uc?id=17tYrTocLetMupZ1D6FKYBqPjgMfMa_7A",
                         width: constraint.maxWidth,
                         height: constraint.maxHeight,
                         fit: constraint.maxWidth > 1400
                             ? BoxFit.fitWidth
                             : BoxFit.fitHeight,
-                        cacheKey: "bg-image",
                         colorBlendMode: BlendMode.dstATop,
                         color: Colors.grey.shade900
-                            .withOpacity(constraint.maxWidth <= 800 ? .3 : 1),
-                        imageUrl:
-                            "https://drive.google.com/uc?export=view&id=1jVGM1tC5D7Q859WkJ8xJyLfbY_lxC9I5",
-                        // "https://static.vecteezy.com/system/resources/previews/005/299/230/non_2x/financial-stock-market-graph-on-stock-market-investment-trading-bullish-point-bearish-point-trend-of-graph-for-business-idea-and-all-art-work-design-illustration-vector.jpg",
+                            .withOpacity(constraint.maxWidth <= 800 ? 0 : 1),
                       ),
+                      // CachedNetworkImage(
+                      // width: constraint.maxWidth,
+                      // height: constraint.maxHeight,
+                      // fit: constraint.maxWidth > 1400
+                      //     ? BoxFit.fitWidth
+                      //     : BoxFit.fitHeight,
+                      //   cacheKey: "bg-image",
+                      //   colorBlendMode: BlendMode.dstATop,
+                      // color: Colors.grey.shade900
+                      //     .withOpacity(constraint.maxWidth <= 800 ? 0 : 1),
+                      //   imageUrl:
+                      //       "https://drive.google.com/uc?id=17tYrTocLetMupZ1D6FKYBqPjgMfMa_7A",
+                      //   // "https://static.vecteezy.com/system/resources/previews/005/299/230/non_2x/financial-stock-market-graph-on-stock-market-investment-trading-bullish-point-bearish-point-trend-of-graph-for-business-idea-and-all-art-work-design-illustration-vector.jpg",
+                      // ),
                       // Text(constraint.maxWidth.toString()),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -133,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Card(
                             color: constraint.maxWidth <= 800
                                 ? Colors.transparent
-                                : Colors.grey.shade900,
+                                : Colors.grey.shade100,
                             shadowColor: constraint.maxWidth <= 800
                                 ? Colors.transparent
                                 : Colors.grey.shade600,
@@ -153,73 +168,18 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     SizedBox(
                                       width: double.maxFinite,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Hero(
-                                            tag: "logo",
-                                            child: Container(
-                                              width: 90,
-                                              height: 90,
-                                              color: Colors.blue,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: constraint.maxWidth * .01,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text(
-                                                "WELCOME",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w800,
-                                                  fontSize: 35,
-                                                  height: 1,
-                                                ),
-                                              ),
-                                              Container(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                  minWidth: 200,
-                                                  maxWidth: 300,
-                                                ),
-                                                width: constraint.maxWidth -
-                                                    (((constraint.maxWidth <=
-                                                                    800
-                                                                ? 0
-                                                                : constraint
-                                                                        .maxWidth *
-                                                                    .3) *
-                                                            2) +
-                                                        350),
-                                                child: Text(
-                                                  "Summit Eagle Accounting and Finance",
-                                                  maxLines: 2,
-                                                  style: TextStyle(
-                                                    color: Colors.white
-                                                        .withOpacity(.5),
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 14,
-                                                    height: 1,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                      child: Container(
+                                        // height: 90,
+                                        padding: const EdgeInsets.all(0),
+                                        alignment: Alignment.center,
+                                        child: logo,
                                       ),
                                     ),
                                     Form(
                                       key: _formKey,
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                          horizontal: 20,
+                                          horizontal: 0,
                                         ),
                                         child: Column(
                                           children: [
@@ -253,9 +213,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 _emailSubject.add(text);
                                               },
                                               controller: _emailController,
-                                              cursorColor: Colors.white,
-                                              style: const TextStyle(
-                                                color: Colors.white,
+                                              cursorColor: black,
+                                              style: TextStyle(
+                                                color: black,
                                               ),
                                               decoration:
                                                   _tDes.defaultDecoration(
@@ -289,9 +249,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 }
                                                 return null;
                                               },
-                                              cursorColor: Colors.white,
-                                              style: const TextStyle(
-                                                color: Colors.white,
+                                              cursorColor: black,
+                                              style: TextStyle(
+                                                color: black,
                                               ),
                                               obscureText: obscureText,
                                               controller: _passwordController,
@@ -330,24 +290,22 @@ class _LoginPageState extends State<LoginPage> {
                                                     child: Row(
                                                       children: [
                                                         Checkbox(
-                                                          activeColor:
-                                                              Colors.white,
+                                                          activeColor: black,
                                                           value: isRemember,
-                                                          checkColor: Colors
-                                                              .grey.shade900,
-                                                          side:
-                                                              const BorderSide(
-                                                            color: Colors.white,
+                                                          checkColor:
+                                                              Colors.white,
+                                                          side: BorderSide(
+                                                            color: black,
                                                           ),
                                                           onChanged: (bo) =>
                                                               setState(() =>
                                                                   isRemember =
                                                                       !isRemember),
                                                         ),
-                                                        const Text(
+                                                        Text(
                                                           "Remember me",
                                                           style: TextStyle(
-                                                            color: Colors.white,
+                                                            color: black,
                                                           ),
                                                         )
                                                       ],
@@ -357,8 +315,11 @@ class _LoginPageState extends State<LoginPage> {
                                                   SizedBox(
                                                     child: TextButton(
                                                       onPressed: () {},
-                                                      child: const Text(
+                                                      child: Text(
                                                         "Forgot Password",
+                                                        style: TextStyle(
+                                                          color: orange,
+                                                        ),
                                                       ),
                                                     ),
                                                   )
@@ -366,7 +327,7 @@ class _LoginPageState extends State<LoginPage> {
                                               ),
                                             ),
                                             const SizedBox(
-                                              height: 40,
+                                              height: 20,
                                             ),
                                             SizedBox(
                                               width: double.maxFinite,
@@ -386,7 +347,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     await login();
                                                   }
                                                 },
-                                                color: Colors.blue.shade800,
+                                                color: orange,
                                                 child: const Center(
                                                   child: Text(
                                                     "LOGIN",
@@ -401,15 +362,15 @@ class _LoginPageState extends State<LoginPage> {
                                               ),
                                             ),
                                             const SizedBox(
-                                              height: 20,
+                                              height: 10,
                                             ),
                                             SizedBox(
                                               width: double.maxFinite,
                                               child: RichText(
                                                 text: TextSpan(
                                                   text: "No account yet ? ",
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
+                                                  style: TextStyle(
+                                                    color: black,
                                                     fontSize: 17,
                                                   ),
                                                   children: [
@@ -425,8 +386,7 @@ class _LoginPageState extends State<LoginPage> {
                                                             },
                                                       text: "Create Account",
                                                       style: TextStyle(
-                                                        color: Colors
-                                                            .blue.shade400,
+                                                        color: orange,
                                                         fontWeight:
                                                             FontWeight.w600,
                                                         fontSize: 17,

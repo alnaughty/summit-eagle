@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:summiteagle/globals/app.dart';
 import 'package:summiteagle/splash_screen.dart';
 import 'package:summiteagle/views/auth/login_page.dart';
 import 'package:page_transition/page_transition.dart';
@@ -7,14 +8,32 @@ import 'package:summiteagle/views/landing_page.dart';
 
 class SummitEagle extends StatelessWidget {
   const SummitEagle({Key? key}) : super(key: key);
-
+  static final AppConfig config = AppConfig();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Summit Eagle Accounting and Finance',
+      title: 'SEAF',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        backgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white,
+        buttonTheme: ButtonThemeData(
+          buttonColor: config.orange,
+        ),
+        tabBarTheme: TabBarTheme(
+          unselectedLabelColor: config.black.withOpacity(.5),
+          labelColor: config.black,
+        ),
+        appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(
+            color: config.black,
+          ),
+          titleTextStyle: AppBarTheme.of(context).titleTextStyle?.copyWith(
+                color: config.black,
+              ),
+          backgroundColor: Colors.white,
+        ),
         fontFamily: "Poppins",
       ),
       home: const SplashScreen(),

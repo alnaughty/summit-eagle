@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:summiteagle/globals/access.dart';
+import 'package:summiteagle/globals/app.dart';
+import 'package:summiteagle/globals/widget.dart';
 import 'package:summiteagle/models/drawer_items.dart';
 import 'package:summiteagle/services/data_cacher.dart';
 
@@ -13,34 +15,35 @@ class WebView extends StatefulWidget {
   State<WebView> createState() => _WebViewState();
 }
 
-class _WebViewState extends State<WebView> with SingleTickerProviderStateMixin {
+class _WebViewState extends State<WebView>
+    with SingleTickerProviderStateMixin, AppConfig {
   final DataCacher _dataCacher = DataCacher.instance;
-  final Widget title = Row(
-    children: [
-      Hero(
-        tag: "logo",
-        child: Container(
-          height: 50,
-          width: 50,
-          color: Colors.red,
-        ),
-      ),
-      const SizedBox(
-        width: 10,
-      ),
-      Expanded(
-        child: Text(
-          "Summit Eagle \nAccounting and Finance",
-          maxLines: 2,
-          style: TextStyle(
-            fontSize: 13,
-            color: Colors.white.withOpacity(.8),
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      )
-    ],
-  );
+  // final Widget title = Row(
+  //   children: [
+  //     Hero(
+  //       tag: "logo",
+  //       child: Container(
+  //         height: 50,
+  //         width: 50,
+  //         color: Colors.red,
+  //       ),
+  //     ),
+  //     const SizedBox(
+  //       width: 10,
+  //     ),
+  //     Expanded(
+  //       child: Text(
+  //         "Summit Eagle \nAccounting and Finance",
+  //         maxLines: 2,
+  //         style: TextStyle(
+  //           fontSize: 13,
+  //           color: Colors.white.withOpacity(.8),
+  //           fontWeight: FontWeight.w400,
+  //         ),
+  //       ),
+  //     )
+  //   ],
+  // );
   late final TabController _tabController;
   @override
   void initState() {
@@ -63,14 +66,14 @@ class _WebViewState extends State<WebView> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.grey.shade900,
+      // backgroundColor: Colors.grey.shade900,
       body: SizedBox(
         width: size.width,
         height: size.height,
         child: Column(
           children: [
             AppBar(
-              backgroundColor: Colors.grey.shade900,
+              // backgroundColor: Colors.grey.shade900,
               actions: [
                 // PopupMenuButton<int>(
                 //   tooltip: "Afficher les options de paramètres",
@@ -225,7 +228,13 @@ class _WebViewState extends State<WebView> with SingleTickerProviderStateMixin {
                 children: [
                   SizedBox(
                     width: 250,
-                    child: title,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: SizedBox(
+                        height: 50,
+                        child: logo,
+                      ),
+                    ),
                   ),
                   const Spacer(),
                   Expanded(
@@ -236,11 +245,11 @@ class _WebViewState extends State<WebView> with SingleTickerProviderStateMixin {
                       controller: _tabController,
                       physics: const NeverScrollableScrollPhysics(),
                       labelStyle: TextStyle(
-                        color: Colors.blue.shade800,
+                        color: orange,
                       ),
-                      indicatorColor: Colors.blue.shade800,
+                      indicatorColor: orange,
                       unselectedLabelStyle:
-                          const TextStyle(color: Colors.white),
+                          TextStyle(color: black.withOpacity(.7)),
                       tabs: [
                         ...widget.drawerItems.map(
                           (e) => Tab(

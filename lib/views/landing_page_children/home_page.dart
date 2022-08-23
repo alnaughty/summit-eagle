@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (_, constraint) => Scaffold(
-        backgroundColor: Colors.grey.shade800,
+        // backgroundColor: Colors.grey.shade800,
         body: constraint.maxWidth > 900
             ? HomeWebView(
                 scrollController: _scrollController,

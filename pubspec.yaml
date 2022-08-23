@@ -10,21 +10,24 @@ environment:
 
 dependencies:
   cached_network_image: ^3.2.0
-  cloud_firestore: ^3.1.10
+  cloud_firestore: ^3.4.3
   cupertino_icons: ^1.0.2
-  firebase_auth: ^3.3.11
+  firebase_auth: ^3.6.2
   firebase_core: ^1.13.1
   firebase_storage: ^10.2.9
   flutter:
     sdk: flutter
   flutter_toastr: ^1.0.3
   fluttertoast: ^8.0.9
-  image_picker: ^0.8.4+11
+  # image_picker: ^0.8.4+11
+  intl: ^0.17.0
   page_transition: ^2.0.5
+  parallax_animation: ^0.0.3
   path_provider: ^2.0.9
   permission_handler: ^9.2.0
   rxdart: ^0.27.3
   shared_preferences: ^2.0.13
+  flutter_inappwebview: ^5.0.5
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -34,6 +37,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - assets/images/
   fonts:
     - family: Poppins
       fonts:

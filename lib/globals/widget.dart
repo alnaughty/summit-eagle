@@ -13,3 +13,10 @@ Widget loader({
         ),
       ),
     );
+
+Hero get logo => Hero(
+      tag: "logo",
+      child: Image.asset(
+        "assets/images/logo.png",
+      ),
+    );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:summiteagle/globals/access.dart';
+import 'package:summiteagle/globals/widget.dart';
 import 'package:summiteagle/services/auth.dart';
 import 'package:summiteagle/services/data_cacher.dart';
+import 'package:summiteagle/services/firestore/admin.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,11 +17,20 @@ class _SplashScreenState extends State<SplashScreen> {
   final AuthService _authService = AuthService();
   @override
   void initState() {
-    check();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await check();
+    });
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  final Admin admin = Admin();
   check() async {
+    print("CHECK");
     await _cacher.credentials.then((value) async {
       if (value != null) {
         await _authService
@@ -29,18 +40,19 @@ class _SplashScreenState extends State<SplashScreen> {
           password: value.password,
           isRememberd: true,
         )
-            .then((u) {
+            .then((u) async {
           if (u != null) {
             setState(() {
               loggedUser = u;
             });
+            await admin.isAdmin();
             Navigator.pushReplacementNamed(context, '/landing_page');
           } else {
             Navigator.pushReplacementNamed(context, '/login_page');
           }
         });
       } else {
-        await Future.delayed(const Duration(milliseconds: 1300));
+        await Future.delayed(const Duration(milliseconds: 500));
         Navigator.pushReplacementNamed(context, '/login_page');
       }
     });
@@ -49,31 +61,27 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade900,
+      backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           /// LOGO
-          Hero(
-            tag: 'logo',
-            child: Container(
-              width: 120,
-              height: 120,
-              color: Colors.red,
-            ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: logo,
           ),
           const SizedBox(
             height: 30,
           ),
-          const Center(
+          Center(
             child: SizedBox(
               width: 40,
               height: 40,
               child: FittedBox(
                 child: CircularProgressIndicator.adaptive(
-                  value: 30,
-                  backgroundColor: Colors.white,
-                  valueColor: AlwaysStoppedAnimation(Colors.white),
+                  // value: 30,
+                  backgroundColor: Colors.grey.shade200,
+                  valueColor: const AlwaysStoppedAnimation(Colors.orange),
                 ),
               ),
             ),
