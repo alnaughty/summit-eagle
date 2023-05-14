@@ -162,9 +162,6 @@ class _ClientsViewState extends State<ClientsView> with AppConfig {
                                                   ),
                                                 ),
                                                 if (services.isNotEmpty) ...{
-                                                  // const SizedBox(
-                                                  //   height: 2,
-                                                  // ),
                                                   SizedBox(
                                                     height: 30,
                                                     width: w,

@@ -133,376 +133,397 @@ class _RegisterPageState extends State<RegisterPage> with AppConfig {
                         imageUrl:
                             "https://static.vecteezy.com/system/resources/previews/005/299/230/non_2x/financial-stock-market-graph-on-stock-market-investment-trading-bullish-point-bearish-point-trend-of-graph-for-business-idea-and-all-art-work-design-illustration-vector.jpg",
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: constraint.maxWidth <= 800
-                              ? 0
-                              : constraint.maxWidth * .27,
-                          vertical: constraint.maxWidth <= 800
-                              ? 0
-                              : constraint.maxHeight * .01,
-                        ),
-                        child: Align(
-                          alignment: constraint.maxWidth <= 800
-                              ? Alignment.topCenter
-                              : Alignment.center,
-                          child: Card(
-                            color: constraint.maxWidth <= 800
-                                ? Colors.transparent
-                                : Colors.grey.shade900,
-                            shadowColor: constraint.maxWidth <= 800
-                                ? Colors.transparent
-                                : Colors.grey.shade600,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: cardVertPadd,
+                      Positioned.fill(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: constraint.maxWidth <= 800
+                                ? 0
+                                : constraint.maxWidth * .27,
+                            vertical: constraint.maxWidth <= 800
+                                ? 0
+                                : constraint.maxHeight * .01,
+                          ),
+                          child: Align(
+                            alignment: constraint.maxWidth <= 800
+                                ? Alignment.topCenter
+                                : Alignment.center,
+                            child: Card(
+                              color: constraint.maxWidth <= 800
+                                  ? Colors.transparent
+                                  : Colors.white,
+                              shadowColor: constraint.maxWidth <= 800
+                                  ? Colors.transparent
+                                  : Colors.grey.shade600,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: constraint.maxHeight * .01,
-                                    ),
-                                    SizedBox(
-                                      width: double.maxFinite,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // SizedBox(
-                                          //   width: double.maxFinite,
-                                          //   child: Container(
-                                          //     padding: const EdgeInsets.all(0),
-                                          //     alignment: Alignment.center,
-                                          //     child: logo,
-                                          //   ),
-                                          // ),
-                                          Container(
-                                            constraints: const BoxConstraints(
-                                              minWidth: 180,
-                                              maxWidth: 350,
-                                            ),
-                                            width: constraint.maxWidth -
-                                                (((constraint.maxWidth <= 800
-                                                            ? -300
-                                                            : constraint
-                                                                    .maxWidth *
-                                                                .3) *
-                                                        2) +
-                                                    350),
-                                            child: Text(
-                                              "LETS GET STARTED!",
-                                              style: TextStyle(
-                                                color: black,
-                                                fontWeight: FontWeight.w800,
-                                                fontSize: 42,
-                                                height: .8,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: cardVertPadd,
+                                ),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: constraint.maxHeight * .01,
                                       ),
-                                    ),
-                                    Form(
-                                      key: _formKey,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 0,
-                                        ),
+                                      SizedBox(
+                                        width: double.maxFinite,
                                         child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            const SizedBox(
-                                              height: 30,
-                                            ),
-                                            TextFormField(
-                                              keyboardType:
-                                                  TextInputType.emailAddress,
-                                              onFieldSubmitted: (text) async {
-                                                await register();
-                                              },
-                                              validator: (text) {
-                                                if (text!.isEmpty) {
-                                                  return "This field is required";
-                                                }
-                                                if (!text.isEmail) {
-                                                  return "Invalid email";
-                                                }
-                                                return null;
-                                              },
-                                              onChanged: (text) {
-                                                _emailSubject.add(text);
-                                              },
-                                              controller: _emailController,
-                                              cursorColor: black,
-                                              style: TextStyle(
-                                                color: black,
+                                            Container(
+                                              constraints: const BoxConstraints(
+                                                minWidth: 180,
+                                                maxWidth: 350,
                                               ),
-                                              decoration:
-                                                  _tDes.defaultDecoration(
-                                                hintText: "Enter your email",
-                                                labelText: "Email",
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            TextFormField(
-                                              onChanged: (text) {
-                                                _passwordSubject.add(text);
-                                              },
-                                              validator: (text) {
-                                                if (text!.isEmpty) {
-                                                  return "This field is required";
-                                                }
-                                                if (text !=
-                                                    _confPasswordController
-                                                        .text) {
-                                                  return "Password mismatch";
-                                                }
-                                                return null;
-                                              },
-                                              onFieldSubmitted: (text) async {
-                                                await register();
-                                              },
-                                              cursorColor: black,
-                                              style: TextStyle(
-                                                color: black,
-                                              ),
-                                              obscureText: obscureText,
-                                              controller: _passwordController,
-                                              decoration:
-                                                  _tDes.defaultDecoration(
-                                                hintText: "Enter your password",
-                                                labelText: "Password",
-                                                suffixIcon: IconButton(
-                                                  onPressed: () {
-                                                    setState(() => obscureText =
-                                                        !obscureText);
-                                                  },
-                                                  icon: Icon(
-                                                    obscureText
-                                                        ? Icons
-                                                            .visibility_outlined
-                                                        : Icons
-                                                            .visibility_off_outlined,
-                                                    color: Colors.grey.shade700,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            TextFormField(
-                                              onChanged: (text) {
-                                                _confPasswordSubject.add(text);
-                                              },
-                                              validator: (text) {
-                                                if (text!.isEmpty) {
-                                                  return "This field is required";
-                                                }
-                                                if (text !=
-                                                    _passwordController.text) {
-                                                  return "Password mismatch";
-                                                }
-                                                return null;
-                                              },
-                                              onFieldSubmitted: (text) async {
-                                                await register();
-                                              },
-                                              cursorColor: black,
-                                              style: TextStyle(
-                                                color: black,
-                                              ),
-                                              obscureText: obscureConfText,
-                                              controller:
-                                                  _confPasswordController,
-                                              decoration:
-                                                  _tDes.defaultDecoration(
-                                                hintText:
-                                                    "Confirm your password",
-                                                labelText: "Confirm Password",
-                                                suffixIcon: IconButton(
-                                                  onPressed: () {
-                                                    setState(() =>
-                                                        obscureConfText =
-                                                            !obscureConfText);
-                                                  },
-                                                  icon: Icon(
-                                                    obscureConfText
-                                                        ? Icons
-                                                            .visibility_outlined
-                                                        : Icons
-                                                            .visibility_off_outlined,
-                                                    color: Colors.grey.shade700,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            TextFormField(
-                                              onFieldSubmitted: (text) async {
-                                                await register();
-                                              },
-                                              validator: (text) {
-                                                if (text!.isEmpty) {
-                                                  return "This field is required";
-                                                }
-                                                return null;
-                                              },
-                                              controller: _firstName,
-                                              cursorColor: black,
-                                              style: TextStyle(
-                                                color: black,
-                                              ),
-                                              decoration:
-                                                  _tDes.defaultDecoration(
-                                                hintText:
-                                                    "Enter your firstname",
-                                                labelText: "Firstname",
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            TextFormField(
-                                              onFieldSubmitted: (text) async {
-                                                await register();
-                                              },
-                                              validator: (text) {
-                                                if (text!.isEmpty) {
-                                                  return "This field is required";
-                                                }
-                                                return null;
-                                              },
-                                              controller: _lastName,
-                                              cursorColor: black,
-                                              style: TextStyle(
-                                                color: black,
-                                              ),
-                                              decoration:
-                                                  _tDes.defaultDecoration(
-                                                hintText: "Enter your lastname",
-                                                labelText: "Lastname",
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: double.maxFinite,
-                                              child: Wrap(
-                                                crossAxisAlignment:
-                                                    WrapCrossAlignment.start,
-                                                alignment:
-                                                    WrapAlignment.spaceBetween,
-                                                runAlignment:
-                                                    WrapAlignment.spaceBetween,
-                                                children: [
-                                                  SizedBox(
-                                                    width: 250,
-                                                    child: Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          activeColor: black,
-                                                          value: isRemember,
-                                                          checkColor:
-                                                              Colors.white,
-                                                          side: BorderSide(
-                                                            color: black,
-                                                          ),
-                                                          onChanged: (bo) =>
-                                                              setState(() =>
-                                                                  isRemember =
-                                                                      !isRemember),
-                                                        ),
-                                                        Text(
-                                                          "Remember me",
-                                                          style: TextStyle(
-                                                            color: black,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  // Spacer(),
-                                                  // SizedBox(
-                                                  //   child: TextButton(
-                                                  //     onPressed: () {},
-                                                  //     child: const Text(
-                                                  //       "Forgot Password",
-                                                  //     ),
-                                                  //   ),
-                                                  // )
-                                                ],
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 40,
-                                            ),
-                                            SizedBox(
-                                              width: double.maxFinite,
-                                              height: 60,
-                                              child: MaterialButton(
-                                                onPressed: () async {
-                                                  await register();
-                                                },
-                                                color: orange,
-                                                child: const Center(
-                                                  child: Text(
-                                                    "REGISTER",
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 18,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            SizedBox(
-                                              width: double.maxFinite,
-                                              child: RichText(
-                                                text: TextSpan(
-                                                  text:
-                                                      "Already have an account ? ",
-                                                  style: TextStyle(
-                                                    color: black,
-                                                    fontSize: 17,
-                                                  ),
-                                                  children: [
-                                                    TextSpan(
-                                                      recognizer:
-                                                          TapGestureRecognizer()
-                                                            ..onTap = () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                      text: "Login",
-                                                      style: TextStyle(
-                                                        color: orange,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 17,
-                                                      ),
-                                                    )
-                                                  ],
+                                              width: constraint.maxWidth -
+                                                  (((constraint.maxWidth <= 800
+                                                              ? -300
+                                                              : constraint
+                                                                      .maxWidth *
+                                                                  .3) *
+                                                          2) +
+                                                      350),
+                                              child: const Text(
+                                                "LETS GET STARTED!",
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      34, 73, 87, 1),
+                                                  fontWeight: FontWeight.w800,
+                                                  fontSize: 42,
+                                                  height: .8,
                                                 ),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Form(
+                                        key: _formKey,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 0,
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 30,
+                                              ),
+                                              TextFormField(
+                                                keyboardType:
+                                                    TextInputType.emailAddress,
+                                                onFieldSubmitted: (text) async {
+                                                  await register();
+                                                },
+                                                validator: (text) {
+                                                  if (text!.isEmpty) {
+                                                    return "This field is required";
+                                                  }
+                                                  if (!text.isEmail) {
+                                                    return "Invalid email";
+                                                  }
+                                                  return null;
+                                                },
+                                                onChanged: (text) {
+                                                  _emailSubject.add(text);
+                                                },
+                                                controller: _emailController,
+                                                cursorColor: black,
+                                                style: TextStyle(
+                                                  color: black,
+                                                ),
+                                                decoration:
+                                                    _tDes.defaultDecoration(
+                                                  hintText: "Enter your email",
+                                                  labelText: "Email",
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              TextFormField(
+                                                onChanged: (text) {
+                                                  _passwordSubject.add(text);
+                                                },
+                                                validator: (text) {
+                                                  if (text!.isEmpty) {
+                                                    return "This field is required";
+                                                  }
+                                                  if (text !=
+                                                      _confPasswordController
+                                                          .text) {
+                                                    return "Password mismatch";
+                                                  }
+                                                  return null;
+                                                },
+                                                onFieldSubmitted: (text) async {
+                                                  await register();
+                                                },
+                                                cursorColor: black,
+                                                style: TextStyle(
+                                                  color: black,
+                                                ),
+                                                obscureText: obscureText,
+                                                controller: _passwordController,
+                                                decoration:
+                                                    _tDes.defaultDecoration(
+                                                  hintText:
+                                                      "Enter your password",
+                                                  labelText: "Password",
+                                                  suffixIcon: IconButton(
+                                                    onPressed: () {
+                                                      setState(() =>
+                                                          obscureText =
+                                                              !obscureText);
+                                                    },
+                                                    icon: Icon(
+                                                      obscureText
+                                                          ? Icons
+                                                              .visibility_outlined
+                                                          : Icons
+                                                              .visibility_off_outlined,
+                                                      color:
+                                                          Colors.grey.shade700,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              TextFormField(
+                                                onChanged: (text) {
+                                                  _confPasswordSubject
+                                                      .add(text);
+                                                },
+                                                validator: (text) {
+                                                  if (text!.isEmpty) {
+                                                    return "This field is required";
+                                                  }
+                                                  if (text !=
+                                                      _passwordController
+                                                          .text) {
+                                                    return "Password mismatch";
+                                                  }
+                                                  return null;
+                                                },
+                                                onFieldSubmitted: (text) async {
+                                                  await register();
+                                                },
+                                                cursorColor: black,
+                                                style: TextStyle(
+                                                  color: black,
+                                                ),
+                                                obscureText: obscureConfText,
+                                                controller:
+                                                    _confPasswordController,
+                                                decoration:
+                                                    _tDes.defaultDecoration(
+                                                  hintText:
+                                                      "Confirm your password",
+                                                  labelText: "Confirm Password",
+                                                  suffixIcon: IconButton(
+                                                    onPressed: () {
+                                                      setState(() =>
+                                                          obscureConfText =
+                                                              !obscureConfText);
+                                                    },
+                                                    icon: Icon(
+                                                      obscureConfText
+                                                          ? Icons
+                                                              .visibility_outlined
+                                                          : Icons
+                                                              .visibility_off_outlined,
+                                                      color:
+                                                          Colors.grey.shade700,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              TextFormField(
+                                                onFieldSubmitted: (text) async {
+                                                  await register();
+                                                },
+                                                validator: (text) {
+                                                  if (text!.isEmpty) {
+                                                    return "This field is required";
+                                                  }
+                                                  return null;
+                                                },
+                                                controller: _firstName,
+                                                cursorColor: black,
+                                                style: TextStyle(
+                                                  color: black,
+                                                ),
+                                                decoration:
+                                                    _tDes.defaultDecoration(
+                                                  hintText:
+                                                      "Enter your firstname",
+                                                  labelText: "Firstname",
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              TextFormField(
+                                                onFieldSubmitted: (text) async {
+                                                  await register();
+                                                },
+                                                validator: (text) {
+                                                  if (text!.isEmpty) {
+                                                    return "This field is required";
+                                                  }
+                                                  return null;
+                                                },
+                                                controller: _lastName,
+                                                cursorColor: black,
+                                                style: TextStyle(
+                                                  color: black,
+                                                ),
+                                                decoration:
+                                                    _tDes.defaultDecoration(
+                                                  hintText:
+                                                      "Enter your lastname",
+                                                  labelText: "Lastname",
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: double.maxFinite,
+                                                child: Wrap(
+                                                  crossAxisAlignment:
+                                                      WrapCrossAlignment.start,
+                                                  alignment: WrapAlignment
+                                                      .spaceBetween,
+                                                  runAlignment: WrapAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 250,
+                                                      child: Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            activeColor:
+                                                                const Color
+                                                                        .fromRGBO(
+                                                                    34,
+                                                                    73,
+                                                                    87,
+                                                                    1),
+                                                            value: isRemember,
+                                                            checkColor:
+                                                                Colors.white,
+                                                            side:
+                                                                const BorderSide(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      34,
+                                                                      73,
+                                                                      87,
+                                                                      1),
+                                                            ),
+                                                            onChanged: (bo) =>
+                                                                setState(() =>
+                                                                    isRemember =
+                                                                        !isRemember),
+                                                          ),
+                                                          const Text(
+                                                            "Remember me",
+                                                            style: TextStyle(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      34,
+                                                                      73,
+                                                                      87,
+                                                                      1),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 40,
+                                              ),
+                                              SizedBox(
+                                                width: double.maxFinite,
+                                                height: 60,
+                                                child: MaterialButton(
+                                                  onPressed: () async {
+                                                    await register();
+                                                  },
+                                                  color: const Color.fromRGBO(
+                                                      34, 73, 87, 1),
+                                                  child: const Center(
+                                                    child: Text(
+                                                      "R E G I S T E R",
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 18,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Center(
+                                                child: SizedBox(
+                                                  width: double.maxFinite,
+                                                  child: RichText(
+                                                    textAlign: TextAlign.center,
+                                                    text: TextSpan(
+                                                      text:
+                                                          "Already have an account ? ",
+                                                      style: const TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            34, 73, 87, 1),
+                                                        fontSize: 17,
+                                                      ),
+                                                      children: [
+                                                        TextSpan(
+                                                          recognizer:
+                                                              TapGestureRecognizer()
+                                                                ..onTap = () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                          text: "Login",
+                                                          style:
+                                                              const TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    34,
+                                                                    73,
+                                                                    87,
+                                                                    1),
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontSize: 17,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

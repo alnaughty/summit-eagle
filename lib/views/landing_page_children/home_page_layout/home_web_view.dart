@@ -34,233 +34,97 @@ class _HomeWebViewState extends State<HomeWebView> with AppConfig {
             children: [
               SizedBox(
                 width: double.maxFinite,
-                height: 800,
-                child: ParallaxWidget(
-                  background: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: Image.network(
-                          "https://wallpaperaccess.com/full/1454022.jpg",
-                          loadingBuilder: (_, child, progress) {
-                            if (progress == null) return child;
-                            return Center(
-                              child: CircularProgressIndicator.adaptive(
-                                backgroundColor: Colors.grey.shade200,
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(orange),
-                              ),
-                            );
-                          },
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Positioned.fill(
-                        child: Container(
-                          color: Colors.black.withOpacity(.5),
-                        ),
-                      ),
-                    ],
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Spacer(),
-                              AnimatedFadeWidget(
-                                child: Text(
-                                  "Taxation of digital economy".toUpperCase(),
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w700,
-                                    height: 1,
-                                  ),
-                                ),
-                                slideFrom: const Offset(-1, 0),
-                                duration: const Duration(
-                                  milliseconds: 600,
-                                ),
-                              ),
-                              Container(
-                                width: 250,
-                                height: 10,
-                                color: orange,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const AnimatedFadeWidget(
-                                slideFrom: Offset(1, 0),
-                                duration: Duration(
-                                  milliseconds: 600,
-                                ),
-                                child: Text(
-                                  "Explore our interactive tool for a comparison of unilateral measures across the globe.",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 70,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: -1,
-                        left: 0,
-                        right: 0,
-                        child: Container(
-                            height: 300,
-                            width: constraint.maxWidth,
-                            decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: [
-                                Colors.white,
-                                Colors.transparent,
-                              ],
-                            ))),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                height: 1000,
+                child: Stack(
                   children: [
-                    StreamBuilder<Stream<QuerySnapshot<NewsModel>>>(
-                      stream: _nvm.stream,
-                      builder: (_, snapshot) => !snapshot.hasData ||
-                              snapshot.hasError
-                          ? Container()
-                          : StreamBuilder<QuerySnapshot<NewsModel>>(
-                              stream: snapshot.data!,
-                              builder: (_, query) => !query.hasData ||
-                                      query.hasError
-                                  ? Container()
-                                  : Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "SEAF News",
-                                          style: TextStyle(
-                                            color: black,
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        ...query.data!.docs.map(
-                                          (e) {
-                                            final DateTime? date = e
-                                                .get("date")
-                                                .toString()
-                                                .convertedEpoch();
-                                            return Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: 10,
-                                                  height: 10,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: orange,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(e.get("title"),
-                                                          style: TextStyle(
-                                                            fontSize: 19,
-                                                            height: 1,
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            color: orange,
-                                                          )),
-                                                      Text(e.get("data"),
-                                                          style: TextStyle(
-                                                            fontSize: 16,
-                                                            color: black,
-                                                          )),
-                                                      if (date != null) ...{
-                                                        const SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        RichText(
-                                                          text: TextSpan(
-                                                              text:
-                                                                  "Date posted : ",
-                                                              style: TextStyle(
-                                                                fontFamily:
-                                                                    "Poppins",
-                                                                fontSize: 15,
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade600,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                              ),
-                                                              children: [
-                                                                TextSpan(
-                                                                  text: DateFormat(
-                                                                          "MMMM dd, yyyy")
-                                                                      .format(
-                                                                          date),
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    color: Colors
-                                                                        .grey
-                                                                        .shade600,
-                                                                  ),
-                                                                )
-                                                              ]),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 20,
-                                                        ),
-                                                      },
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            );
-                                          },
-                                        ),
-                                        // for(QueryDocumentSnapshot<NewsModel> in )...{},
-                                      ],
-                                    ),
+                    Positioned.fill(
+                        child: Image.asset(
+                      "assets/images/image_3.png",
+                      fit: BoxFit.cover,
+                    )),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 280, horizontal: 80),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Stack(
+                              children: <Widget>[
+                                Text(
+                                  'S E A F',
+                                  style: TextStyle(
+                                    fontSize: 60,
+                                    foreground: Paint()
+                                      ..style = PaintingStyle.stroke
+                                      ..strokeWidth = 3
+                                      ..color = Colors.white,
+                                    fontFamily: "BrunoAce",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const Text(
+                                  'S E A F',
+                                  style: TextStyle(
+                                    fontSize: 60,
+                                    color: Color.fromRGBO(34, 73, 87, 1),
+                                    fontFamily: "BrunoAce",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
+                            const SizedBox(
+                              height: 3,
+                            ),
+                            RichText(
+                              text: const TextSpan(
+                                style: TextStyle(
+                                  color: Color.fromRGBO(255, 255, 255, 0.7),
+                                  fontFamily: "Montserrat",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: 'S',
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(34, 73, 87, 1),
+                                        fontFamily: "BrunoAce",
+                                        fontSize: 25),
+                                  ),
+                                  TextSpan(text: 'ummit '),
+                                  TextSpan(
+                                    text: 'E',
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(34, 73, 87, 1),
+                                        fontFamily: "BrunoAce",
+                                        fontSize: 25),
+                                  ),
+                                  TextSpan(text: 'agle '),
+                                  TextSpan(
+                                    text: 'A',
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(34, 73, 87, 1),
+                                        fontFamily: "BrunoAce",
+                                        fontSize: 25),
+                                  ),
+                                  TextSpan(text: 'ccounting & '),
+                                  TextSpan(
+                                    text: 'F',
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(34, 73, 87, 1),
+                                        fontFamily: "BrunoAce",
+                                        fontSize: 25),
+                                  ),
+                                  TextSpan(text: 'inance'),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    ClientsView(
-                      scrollController: widget.scrollController,
-                    ),
-                    TaxInfoView(),
                   ],
                 ),
               ),

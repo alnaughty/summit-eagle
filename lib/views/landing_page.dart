@@ -7,7 +7,9 @@ import 'package:summiteagle/models/news_model.dart';
 import 'package:summiteagle/view_model/client_vm.dart';
 import 'package:summiteagle/view_model/news_vm.dart';
 import 'package:summiteagle/views/landing_page_children/about_us_page.dart';
+import 'package:summiteagle/views/landing_page_children/back_office_page_layout/back_office_page.dart';
 import 'package:summiteagle/views/landing_page_children/home_page.dart';
+import 'package:summiteagle/views/landing_page_children/service_page_layout/service_page.dart';
 import 'package:summiteagle/views/landing_page_layout/mobile_view.dart';
 import 'package:summiteagle/views/landing_page_layout/tablet_view.dart';
 import 'package:summiteagle/views/landing_page_layout/web_view.dart';
@@ -67,9 +69,7 @@ class _LandingPageState extends State<LandingPage> {
         });
       },
       icon: Icons.home_repair_service,
-      child: Container(
-        color: Colors.blue,
-      ),
+      child: ServicePage(),
       title: "Services",
     ),
     if (isUserAdmin) ...{
@@ -85,9 +85,7 @@ class _LandingPageState extends State<LandingPage> {
           });
         },
         icon: Icons.settings_sharp,
-        child: Container(
-          color: Colors.blue,
-        ),
+        child: BackOfficePage(),
         title: "Back office",
       ),
     },

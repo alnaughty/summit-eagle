@@ -49,7 +49,7 @@ class _MobileViewState extends State<MobileView>
             children: [
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: logo,
+                child: logoSmall(withsubtitle: true),
               ),
               Expanded(
                 child: ListView(
@@ -89,9 +89,6 @@ class _MobileViewState extends State<MobileView>
                           padding: const EdgeInsets.all(10),
                           height: 60,
                           onPressed: () {
-                            // setState(
-                            //   () => widget.currentIndex = widget.drawerItems.indexOf(e),
-                            // );
                             Navigator.of(context).pop(null);
                             widget.drawerItems[index].onTap(index);
                             _tabController.animateTo(index);
@@ -136,8 +133,6 @@ class _MobileViewState extends State<MobileView>
                     height: 60,
                     elevation: 0,
                     onPressed: () async {
-                      // Navigator.of(context).pop(null);
-
                       await _dataCacher.clearCredentials().whenComplete(
                             () => Navigator.pushReplacementNamed(
                                 context, '/login_page'),
@@ -147,16 +142,16 @@ class _MobileViewState extends State<MobileView>
                         loggedUser = null;
                       });
                     },
-                    child: ListTile(
+                    child: const ListTile(
                       leading: Icon(
                         Icons.exit_to_app_rounded,
-                        color: Colors.red.shade400,
+                        color: Colors.black,
                       ),
                       title: Text(
                         "Logout",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          color: Colors.red.shade400,
+                          color: Colors.black,
                           fontSize: 14,
                         ),
                       ),
@@ -167,9 +162,6 @@ class _MobileViewState extends State<MobileView>
               const SizedBox(
                 height: 20,
               ),
-              // ...widget.drawerItems.map(
-              //   (e) => ,
-              // )
             ],
           ),
         ),
@@ -185,21 +177,10 @@ class _MobileViewState extends State<MobileView>
       ),
       appBar: AppBar(
         centerTitle: true,
-        // backgroundColor: Colors.red,
         title: SizedBox(
-          height: 50,
-          child: logo,
+          height: 70,
+          child: logoSmall(withsubtitle: false),
         ),
-        // title: Text(
-        //   "Summit Eagle \nAccounting and Finance",
-        //   maxLines: 2,
-        //   style: TextStyle(
-        //     fontSize: 15,
-        //     color: black,
-        //     height: 1,
-        //     fontWeight: FontWeight.w400,
-        //   ),
-        // ),
       ),
     );
   }

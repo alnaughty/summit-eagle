@@ -26,7 +26,7 @@ class AboutUsMainPage extends StatelessWidget with AppConfig {
                     children: [
                       Positioned.fill(
                         child: Image.asset(
-                          "assets/images/about_us.webp",
+                          "assets/images/image_3.png",
                           fit: BoxFit.fitHeight,
                           alignment: Alignment.topCenter,
                         ),
@@ -48,6 +48,7 @@ class AboutUsMainPage extends StatelessWidget with AppConfig {
                             children: [
                               const Spacer(),
                               AnimatedFadeWidget(
+                                // ignore: sort_child_properties_last
                                 child: Text(
                                   "Get to know us".toUpperCase(),
                                   style: const TextStyle(
@@ -76,7 +77,7 @@ class AboutUsMainPage extends StatelessWidget with AppConfig {
                                   milliseconds: 600,
                                 ),
                                 child: Text(
-                                  "Bringing precision, consistency, and punctuality to your tax and accounting needs.",
+                                  "Bringing Precision, Consistency, and Punctuality to your Tax and Accounting Needs.",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,

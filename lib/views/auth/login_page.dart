@@ -117,21 +117,6 @@ class _LoginPageState extends State<LoginPage> with AppConfig {
                         color: Colors.grey.shade900
                             .withOpacity(constraint.maxWidth <= 800 ? 0 : 1),
                       ),
-                      // CachedNetworkImage(
-                      // width: constraint.maxWidth,
-                      // height: constraint.maxHeight,
-                      // fit: constraint.maxWidth > 1400
-                      //     ? BoxFit.fitWidth
-                      //     : BoxFit.fitHeight,
-                      //   cacheKey: "bg-image",
-                      //   colorBlendMode: BlendMode.dstATop,
-                      // color: Colors.grey.shade900
-                      //     .withOpacity(constraint.maxWidth <= 800 ? 0 : 1),
-                      //   imageUrl:
-                      //       "https://drive.google.com/uc?id=17tYrTocLetMupZ1D6FKYBqPjgMfMa_7A",
-                      //   // "https://static.vecteezy.com/system/resources/previews/005/299/230/non_2x/financial-stock-market-graph-on-stock-market-investment-trading-bullish-point-bearish-point-trend-of-graph-for-business-idea-and-all-art-work-design-illustration-vector.jpg",
-                      // ),
-                      // Text(constraint.maxWidth.toString()),
                       Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: constraint.maxWidth <= 800
@@ -172,8 +157,23 @@ class _LoginPageState extends State<LoginPage> with AppConfig {
                                         // height: 90,
                                         padding: const EdgeInsets.all(0),
                                         alignment: Alignment.center,
-                                        child: logo,
+                                        child: const Text(
+                                          'S E A F',
+                                          style: TextStyle(
+                                            fontSize: 60,
+                                            color:
+                                                Color.fromRGBO(34, 73, 87, 1),
+                                            fontFamily: "BrunoAce",
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
+                                    ),
+                                    const Text(
+                                      'Summit Eagle Accounting & Finance',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Color.fromRGBO(34, 73, 87, 1)),
                                     ),
                                     Form(
                                       key: _formKey,
@@ -290,22 +290,39 @@ class _LoginPageState extends State<LoginPage> with AppConfig {
                                                     child: Row(
                                                       children: [
                                                         Checkbox(
-                                                          activeColor: black,
+                                                          activeColor:
+                                                              const Color
+                                                                      .fromRGBO(
+                                                                  34,
+                                                                  73,
+                                                                  87,
+                                                                  1),
                                                           value: isRemember,
                                                           checkColor:
                                                               Colors.white,
-                                                          side: BorderSide(
-                                                            color: black,
+                                                          side:
+                                                              const BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    34,
+                                                                    73,
+                                                                    87,
+                                                                    1),
                                                           ),
                                                           onChanged: (bo) =>
                                                               setState(() =>
                                                                   isRemember =
                                                                       !isRemember),
                                                         ),
-                                                        Text(
+                                                        const Text(
                                                           "Remember me",
                                                           style: TextStyle(
-                                                            color: black,
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    34,
+                                                                    73,
+                                                                    87,
+                                                                    1),
                                                           ),
                                                         )
                                                       ],
@@ -315,10 +332,11 @@ class _LoginPageState extends State<LoginPage> with AppConfig {
                                                   SizedBox(
                                                     child: TextButton(
                                                       onPressed: () {},
-                                                      child: Text(
+                                                      child: const Text(
                                                         "Forgot Password",
                                                         style: TextStyle(
-                                                          color: orange,
+                                                          color: Color.fromRGBO(
+                                                              34, 73, 87, 1),
                                                         ),
                                                       ),
                                                     ),
@@ -347,10 +365,11 @@ class _LoginPageState extends State<LoginPage> with AppConfig {
                                                     await login();
                                                   }
                                                 },
-                                                color: orange,
+                                                color: const Color.fromRGBO(
+                                                    34, 73, 87, 1),
                                                 child: const Center(
                                                   child: Text(
-                                                    "LOGIN",
+                                                    "L O G I N",
                                                     style: TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:
@@ -362,37 +381,42 @@ class _LoginPageState extends State<LoginPage> with AppConfig {
                                               ),
                                             ),
                                             const SizedBox(
-                                              height: 10,
+                                              height: 15,
                                             ),
-                                            SizedBox(
-                                              width: double.maxFinite,
-                                              child: RichText(
-                                                text: TextSpan(
-                                                  text: "No account yet ? ",
-                                                  style: TextStyle(
-                                                    color: black,
-                                                    fontSize: 17,
+                                            Center(
+                                              child: SizedBox(
+                                                width: double.maxFinite,
+                                                child: RichText(
+                                                  textAlign: TextAlign.center,
+                                                  text: TextSpan(
+                                                    text: "No account yet ? ",
+                                                    style: const TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          34, 73, 87, 1),
+                                                      fontSize: 17,
+                                                    ),
+                                                    children: [
+                                                      TextSpan(
+                                                        recognizer:
+                                                            TapGestureRecognizer()
+                                                              ..onTap = () {
+                                                                Navigator
+                                                                    .pushNamed(
+                                                                  context,
+                                                                  "/register_page",
+                                                                );
+                                                              },
+                                                        text: "Create Account",
+                                                        style: const TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              34, 73, 87, 1),
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 17,
+                                                        ),
+                                                      )
+                                                    ],
                                                   ),
-                                                  children: [
-                                                    TextSpan(
-                                                      recognizer:
-                                                          TapGestureRecognizer()
-                                                            ..onTap = () {
-                                                              Navigator
-                                                                  .pushNamed(
-                                                                context,
-                                                                "/register_page",
-                                                              );
-                                                            },
-                                                      text: "Create Account",
-                                                      style: TextStyle(
-                                                        color: orange,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 17,
-                                                      ),
-                                                    )
-                                                  ],
                                                 ),
                                               ),
                                             ),

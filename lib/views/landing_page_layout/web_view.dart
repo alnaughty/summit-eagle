@@ -18,32 +18,7 @@ class WebView extends StatefulWidget {
 class _WebViewState extends State<WebView>
     with SingleTickerProviderStateMixin, AppConfig {
   final DataCacher _dataCacher = DataCacher.instance;
-  // final Widget title = Row(
-  //   children: [
-  //     Hero(
-  //       tag: "logo",
-  //       child: Container(
-  //         height: 50,
-  //         width: 50,
-  //         color: Colors.red,
-  //       ),
-  //     ),
-  //     const SizedBox(
-  //       width: 10,
-  //     ),
-  //     Expanded(
-  //       child: Text(
-  //         "Summit Eagle \nAccounting and Finance",
-  //         maxLines: 2,
-  //         style: TextStyle(
-  //           fontSize: 13,
-  //           color: Colors.white.withOpacity(.8),
-  //           fontWeight: FontWeight.w400,
-  //         ),
-  //       ),
-  //     )
-  //   ],
-  // );
+
   late final TabController _tabController;
   @override
   void initState() {
@@ -66,68 +41,13 @@ class _WebViewState extends State<WebView>
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      // backgroundColor: Colors.grey.shade900,
       body: SizedBox(
         width: size.width,
         height: size.height,
         child: Column(
           children: [
             AppBar(
-              // backgroundColor: Colors.grey.shade900,
               actions: [
-                // PopupMenuButton<int>(
-                //   tooltip: "Afficher les options de paramètres",
-                //   padding: const EdgeInsets.all(0),
-                //   offset: const Offset(0, 45),
-                // onSelected: (int value) async {
-                //   // callback(value);
-                // },
-                //   icon: SizedBox(
-                //     width: 40,
-                //     height: 40,
-                //     child: ClipRRect(
-                //       borderRadius: BorderRadius.circular(60),
-                //       child: loggedUser!.photoURL == null
-                //           ? Icon(
-                //               Icons.account_circle_outlined,
-                //               color: Colors.grey.shade200,
-                //             )
-                //           : Image.network(loggedUser!.photoURL!),
-                //     ),
-                //   ),
-                //   itemBuilder: (_) => <PopupMenuItem<int>>[
-                //     PopupMenuItem(
-                //       value: 0,
-                //       child: Row(
-                //         children: const [
-                //           Icon(Icons.person),
-                //           SizedBox(
-                //             width: 10,
-                //           ),
-                //           Text("Details")
-                //         ],
-                //       ),
-                //     ),
-                //     PopupMenuItem(
-                //       value: 2,
-                //       child: Row(
-                //         children: const [
-                //           Icon(
-                //             Icons.exit_to_app,
-                //             color: Colors.red,
-                //           ),
-                // SizedBox(
-                //   width: 10,
-                // ),
-                //           Text(
-                //             "Déconnecter",
-                //             style: TextStyle(color: Colors.red),
-                //           )
-                //         ],
-                //       ),
-                //     )
-                //   ],
-                // ),
                 PopupMenuButton(
                   onSelected: (v) async {
                     if (v == "/logout") {
@@ -141,9 +61,7 @@ class _WebViewState extends State<WebView>
                               result: {},
                             ),
                           );
-                    } else {
-                      /// show account details
-                    }
+                    } else {}
                   },
                   tooltip: "Account",
                   shape: RoundedRectangleBorder(
@@ -162,7 +80,7 @@ class _WebViewState extends State<WebView>
                               child: FittedBox(
                                 child: Icon(
                                   Icons.account_circle_outlined,
-                                  color: Colors.grey.shade200,
+                                  color: Colors.grey.shade300,
                                 ),
                               ),
                             )
@@ -170,39 +88,39 @@ class _WebViewState extends State<WebView>
                     ),
                   ),
                   itemBuilder: (_) => [
-                    PopupMenuItem(
-                      value: "/show_details",
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.account_box_rounded,
-                            color: Colors.grey.shade200,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Text(
-                              "Details",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.grey.shade200,
-                                fontSize: 12,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    // PopupMenuItem(
+                    //  value: "/show_details",
+                    // child: Row(
+                    //  children: [
+                    //   Icon(
+                    //    Icons.account_box_rounded,
+                    //   color: Colors.grey.shade200,
+                    // ),
+                    // const SizedBox(
+                    //   width: 10,
+                    //  ),
+                    //  Expanded(
+                    //   child: Text(
+                    //  "Details",
+                    //  style: TextStyle(
+                    //   fontWeight: FontWeight.w500,
+                    //    color: Colors.grey.shade200,
+                    //   fontSize: 12,
+                    // ),
+                    //  ),
+                    //)
+                    // ],
+                    // ),
+                    // ),
                     PopupMenuItem(
                       value: "/logout",
                       child: Row(
-                        children: [
+                        children: const [
                           Icon(
                             Icons.exit_to_app_rounded,
-                            color: Colors.red.shade400,
+                            color: Colors.white,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 10,
                           ),
                           Expanded(
@@ -210,7 +128,7 @@ class _WebViewState extends State<WebView>
                               "Logout",
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
-                                color: Colors.red.shade400,
+                                color: Colors.white,
                                 fontSize: 12,
                               ),
                             ),
@@ -231,8 +149,8 @@ class _WebViewState extends State<WebView>
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: SizedBox(
-                        height: 50,
-                        child: logo,
+                        height: 70,
+                        child: logoSmall(),
                       ),
                     ),
                   ),
@@ -262,34 +180,6 @@ class _WebViewState extends State<WebView>
                 ],
               ),
             ),
-            // Container(
-            //   width: size.width,
-            //   height: 60,
-            //   child: Row(
-            //     children: [
-            //       title,
-            //       // const Spacer(),
-            //       // Expanded(
-            // child: TabBar(
-            //   controller: _tabController,
-            //   physics: const NeverScrollableScrollPhysics(),
-            //   labelStyle: TextStyle(
-            //     color: Colors.blue.shade800,
-            //   ),
-            //   indicatorColor: Colors.blue.shade800,
-            //   unselectedLabelStyle: const TextStyle(color: Colors.white),
-            //   tabs: [
-            //     ...widget.drawerItems.map(
-            //       (e) => Tab(
-            //         text: e.title,
-            //       ),
-            //     )
-            //   ],
-            // ),
-            //       // )
-            //     ],
-            //   ),
-            // ),
             Expanded(
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),

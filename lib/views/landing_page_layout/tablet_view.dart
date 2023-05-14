@@ -36,25 +36,14 @@ class _TabletViewState extends State<TabletView>
     super.dispose();
   }
 
-  // int curr
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: SizedBox(
-          height: 50,
-          child: logo,
-        ),
-        // backgroundColor: Colors.grey.shade900,
-      ),
-      // backgroundColor: Colors.grey.shade800,
       body: Row(
         children: [
           Container(
               height: double.maxFinite,
               width: 70,
-              // color: Colors.grey.shade100,
               child: Column(
                 children: [
                   Expanded(
@@ -109,7 +98,7 @@ class _TabletViewState extends State<TabletView>
                       },
                       child: Icon(
                         Icons.exit_to_app_rounded,
-                        color: Colors.red.shade400,
+                        color: black,
                       ),
                     ),
                   ),
@@ -128,7 +117,6 @@ class _TabletViewState extends State<TabletView>
               ],
               controller: _tabController,
             ),
-            // child: widget.drawerItems[widget.currentIndex].child,
           )
         ],
       ),

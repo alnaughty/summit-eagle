@@ -81,7 +81,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: CircularProgressIndicator.adaptive(
                   // value: 30,
                   backgroundColor: Colors.grey.shade200,
-                  valueColor: const AlwaysStoppedAnimation(Colors.orange),
+                  valueColor: const AlwaysStoppedAnimation(
+                      Color.fromRGBO(34, 73, 87, 1)),
                 ),
               ),
             ),

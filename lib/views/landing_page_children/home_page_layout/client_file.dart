@@ -113,7 +113,7 @@ class ClientFileViewer extends StatelessWidget with AppConfig {
                   });
                 },
                 height: 55,
-                child: const Text(
+                child: Text(
                   "Upload new file",
                   style: TextStyle(
                     color: Colors.white,
